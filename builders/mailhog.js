@@ -9,7 +9,7 @@ module.exports = {
   name: 'mailhog',
   config: {
     version: 'v1.0.1',
-    supported: ['v1.0.0', 'v1.0.1', 'v1.0.1'],
+    supported: ['v1.0.0', 'v1.0.1'],
     confSrc: path.resolve(__dirname, '..', 'config'),
     hogfrom: [],
     port: '1025',
@@ -51,13 +51,12 @@ module.exports = {
         // Get download URL based on ARCH
         // const mhsendmailURL = (isArmed) ? arm64dlUrl : amd64dlUrl;
         // Add some build tazk
-        const dlc = '/helpers/mailhog.sh';
-        require('../utils/add-build-step')([dlc], options._app, hog, 'build_as_root_internal');
+        require('../utils/add-build-step')(['/helpers/mailhog.sh'], options._app, hog, 'build_as_root_internal');
         // Set the hogfrom with some extra things
         options.sources.push({services: _.set({}, hog, {
-            environment: {MH_SENDMAIL_SMTP_ADDR: 'sendmailhog:1025'},
-            volumes: [`${options.confDest}/mailhog.ini:/usr/local/etc/php/conf.d/zzzz-lando-mailhog.ini`],
-          })});
+          environment: {MH_SENDMAIL_SMTP_ADDR: 'sendmailhog:1025'},
+          volumes: [`${options.confDest}/mailhog.ini:/usr/local/etc/php/conf.d/zzzz-lando-mailhog.ini`],
+        })});
       });
 
       // Set the mailhpog
