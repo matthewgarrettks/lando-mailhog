@@ -17,7 +17,7 @@ if ! command -v curl >& /dev/null; then apt-get install -y curl; fi;
 ARCH=`uname -m`
 if [[ "${ARCH}" = "aarch64" || "${ARCH}" = "arm" ]]
 then
-    /usr/bin/curl -fsSL -o /usr/local/bin/mhsendmail https://github.com/mailhog/MailHog/releases/tag/v1.0.1/MailHog_linux_arm
+    /usr/bin/curl -fsSL -o /usr/local/bin/mhsendmail https://github.com/evertiro/mhsendmail/releases/download/v0.2.0-M1/mhsendmail_linux_arm64;
     lando_pink "Mailhog downloaded, ${ARCH}"
 else
     /usr/bin/curl -fsSL -o /usr/local/bin/mhsendmail https://github.com/mailhog/MailHog/releases/tag/v1.0.1/MailHog_linux_amd64;
@@ -27,7 +27,8 @@ fi;
 # Set up some new dirs
 mkdir -p /var/www/certs
 mkdir -p /srv/bindings
-chown -R www-data:www-data /var/www/certs /srv/bindings
+chmod ug+x /usr/local/bin/*
+chown -R www-data:www-data /var/www/certs /srv/bindings /usr/local/bin
 
 # Set up some symlnks
 ln -sfn /var/www /srv/bindings/lando
