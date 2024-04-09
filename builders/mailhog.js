@@ -8,8 +8,8 @@ const path = require('path');
 module.exports = {
   name: 'mailhog',
   config: {
-    version: 'v1.0.2',
-    supported: ['v1.0.0', 'v1.0.1', 'v1.0.2'],
+    version: 'v1.0.1',
+    supported: ['v1.0.0', 'v1.0.1', 'v1.0.1'],
     confSrc: path.resolve(__dirname, '..', 'config'),
     hogfrom: [],
     port: '1025',
